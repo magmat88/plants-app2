@@ -18,7 +18,11 @@ type FormField = {
 
 const PlantForm = () => {
 	const {register, handleSubmit, watch, formState: {errors}} = useForm<FormData>();
-	const onSubmit: SubmitHandler<FormData> = (data) => console.log(data);
+	const onSubmit: SubmitHandler<FormData> = (data) => {
+		localStorage.setItem("plantFormData", JSON.stringify(data));
+		console.log(data);
+	}
+
 
 	const formFields: FormField[] = [
 		{label: "Name", fieldName: "name", value: watch("name")},
