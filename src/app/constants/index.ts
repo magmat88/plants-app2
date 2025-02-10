@@ -1,5 +1,5 @@
 export enum LOCATION {
-	SALON = "Salon",
+	LIVING_ROOM = "Living room",
 	BATHROOM_GROUND_FLOOR = "Bathroom ground floor",
 	BEDROOM = "Bedroom",
 	KID_ROOM = "Kid room",
@@ -17,4 +17,8 @@ export enum VISIBLE_STATE {
 	DEAD = "Dead",
 	NEWLY_PLANTED = "Newly planted",
 	PEST_INFESTED = "Pest infested"
+}
+
+export enum LOCAL_STORAGE_KEYS {
+	PLANTS_DATA = "plantsAppData"
 }
