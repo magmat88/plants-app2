@@ -56,7 +56,7 @@ const PlantForm = ({onClose, id}: PlantFormProps) => {
 
 	return (
 		<div className="flex justify-center items-center w-full bg-gray-100 min-h-screen">
-			<form onSubmit={handleSubmit(onSubmit)} className="p-6 bg-white rounded-lg shadow-md w-full max-w-md">
+			<form onSubmit={handleSubmit(onSubmit)} method="POST" className="p-6 bg-white rounded-lg shadow-md w-full max-w-md">
 				<h2 className="text-xl font-bold mb-4 text-center">{id ? "Edit Plant" : "Add Plant"}</h2>
 
 				{formFields.map(({label, fieldName, value, options}) => (
