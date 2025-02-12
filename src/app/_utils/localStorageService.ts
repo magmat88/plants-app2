@@ -83,3 +83,16 @@ export const waterPlant = (plantId: string) => {
 		console.error("Error watering plant in local storage", error);
 	}
 }
+
+export const fertilizePlant = (plantId: string) => {
+	try {
+		const existingPlants = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.PLANTS_DATA) || "[]");
+		const updatedPlants = existingPlants.map((plant: PlantData) => {
+			return plant.id === plantId ? {...plant, lastFertilized: new Date().toISOString()} : plant;
+		});
+
+		localStorage.setItem(LOCAL_STORAGE_KEYS.PLANTS_DATA, JSON.stringify(updatedPlants));
+	} catch (error) {
+		console.error("Error fertilizing plant in local storage", error);
+	}
+}
