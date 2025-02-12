@@ -32,7 +32,12 @@ const PlantForm = ({onClose, id}: PlantFormProps): ReactElement | null => {
 	});
 
 	const onSubmit: SubmitHandler<PlantData> = (data) => {
-		id ? updatePlant(id, data) : savePlant(data);
+		if (id) {
+			updatePlant(id, data);
+		} else {
+			savePlant(data);
+		}
+
 		reset();
 		onClose();
 	}
@@ -54,21 +59,24 @@ const PlantForm = ({onClose, id}: PlantFormProps): ReactElement | null => {
 		}
 	];
 
-	id && formFields.push({
-		label: "Days between watering",
-		fieldName: "daysBetweenWatering",
-		value: watch("daysBetweenWatering"),
-	}, {
-		label: "Days between fertilizing",
-		fieldName: "daysBetweenFertilizing",
-		value: watch("daysBetweenFertilizing"),
+	if (id) {
+		formFields.push({
+			label: "Days between watering",
+			fieldName: "daysBetweenWatering",
+			value: watch("daysBetweenWatering"),
+		}, {
+			label: "Days between fertilizing",
+			fieldName: "daysBetweenFertilizing",
+			value: watch("daysBetweenFertilizing"),
 		})
-
+	}
 
 	useEffect(() => {
 		if (id) {
 			const plantData = getPlantById(id);
-			plantData && reset(plantData);
+			if (plantData) {
+				reset(plantData);
+			}
 		}
 	}, [id, reset])
 

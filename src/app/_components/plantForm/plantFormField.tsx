@@ -1,10 +1,10 @@
-import {useForm} from "react-hook-form";
+import {FieldValues, useForm} from "react-hook-form";
 
 interface PlantFormFieldProps {
 	label: string;
 	fieldName: string;
 	register: ReturnType<typeof useForm>['register'];
-	errors: any;
+	errors: FieldValues;
 	value: string;
 	options?: string;
 }
