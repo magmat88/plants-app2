@@ -1,9 +1,9 @@
 "use client";
 
-import {PlantData} from "@/app/types";
+import {PlantData} from "../../_types";
 import {useEffect, useState} from "react";
 import PlantsList from "@/app/_components/plantsList/plantsList";
-import {getPlants} from "@/app/utils/localStorageService";
+import {getPlants} from "@/app/_utils/localStorageService";
 
 const Main = () => {
 	const [data, setData] = useState<PlantData[]>(null);

@@ -1,6 +1,6 @@
-import {PlantData} from "@/app/types";
-import {LOCAL_STORAGE_KEYS} from "@/app/constants";
-import {generateUniqueId} from "@/app/utils/generateUniqueId";
+import {PlantData} from "../_types";
+import {LOCAL_STORAGE_KEYS} from "../_constants";
+import {generateUniqueId} from "@/app/_utils/generateUniqueId";
 
 export const savePlant = (newPlant: PlantData) => {
 	try {

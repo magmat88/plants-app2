@@ -2,9 +2,9 @@
 
 import {useForm, SubmitHandler} from "react-hook-form";
 import PlantFormField from "@/app/_components/plantForm/plantFormField";
-import {LOCATION, VISIBLE_STATE} from "@/app/constants";
-import {PlantData} from "@/app/types";
-import {getPlantById, savePlant} from "@/app/utils/localStorageService";
+import {LOCATION, VISIBLE_STATE} from "../../_constants";
+import {PlantData} from "../../_types";
+import {getPlantById, savePlant} from "@/app/_utils/localStorageService";
 import {useEffect} from "react";
 
 type FormField = {
