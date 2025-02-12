@@ -4,9 +4,21 @@ import {MantineReactTable, MRT_ColumnDef, useMantineReactTable} from 'mantine-re
 import {useMemo, useState} from "react";
 import {PlantData} from "../../_types";
 import {ActionIcon, Box} from '@mantine/core';
+<<<<<<< HEAD
 import {IconEdit, IconTrash} from '@tabler/icons-react';
 import {removePlant} from "@/app/_utils/localStorageService";
+=======
+import {
+	IconEdit,
+	IconTrash,
+	IconBucketDroplet,
+} from '@tabler/icons-react';
+import {removePlant, waterPlant} from "@/app/utils/localStorageService";
+>>>>>>> 564e648 (fix updating plant, handle watering)
 import PlantForm from "@/app/_components/plantForm/plantForm";
+import {formatDate} from "@/app/utils/dateUtils";
+import {getWateringStatus} from "@/app/helpers/getWateringStatus";
+import {DAYS_BETWEEN_WATERING_DEFAULT} from "@/app/constants";
 
 interface PlantsListProps {
 	data: PlantData[];
@@ -32,6 +44,11 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 		refreshData();
 	}
 
+	const handleWaterPlant = (id: string) => {
+		waterPlant(id);
+		refreshData();
+	}
+
 	const handleEditPlant = (id: string) => {
 		setCurrentId(id);
 		setIsFormVisible(true);
@@ -43,16 +60,25 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 				header: 'Plant name',
 			},
 			{
+				accessorKey: 'lastWatered',
+				header: 'Watering status',
+				Cell: ({cell}) => {
+					const lastWatered = formatDate(cell.getValue() as string | undefined);
+					const daysBetweenWatering = cell.row.original.daysBetweenWatering ?? DAYS_BETWEEN_WATERING_DEFAULT;
+					return getWateringStatus(lastWatered, daysBetweenWatering);
+				}
+			},
+			{
 				accessorKey: 'location',
 				header: 'Location',
 			},
 			{
-				accessorKey: 'description',
-				header: 'Description',
+				accessorKey: 'visibleState',
+				header: 'Visible state',
 			},
 			{
-				accessorKey: 'visibleState',
-				header: 'Visible State',
+				accessorKey: 'description',
+				header: 'Description',
 			},
 		], []
 	);
@@ -70,15 +96,15 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 		enableHiding: false,
 		enableDensityToggle: false,
 		enableRowActions: true,
-		renderRowActions: ({ row }) => (
-			<Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: '8px' }}>
+		renderRowActions: ({row}) => (
+			<Box sx={{display: 'flex', flexWrap: 'nowrap', gap: '8px'}}>
 				<ActionIcon
-					color="blue"
+					color="green"
 					onClick={() => {
 						handleEditPlant(row.original.id);
 					}}
 				>
-					<IconEdit />
+					<IconEdit/>
 				</ActionIcon>
 				<ActionIcon
 					color="red"
@@ -86,7 +112,15 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 						handleRemovePlant(row.original.id);
 					}}
 				>
-					<IconTrash />
+					<IconTrash/>
+				</ActionIcon>
+				<ActionIcon
+					color="blue"
+					onClick={() => {
+						handleWaterPlant(row.original.id);
+					}}
+				>
+					<IconBucketDroplet/>
 				</ActionIcon>
 			</Box>
 		),
@@ -109,8 +143,8 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 
 			<MantineReactTable table={table}/>
 		</div>
-)
-	;
+	)
+		;
 }
 
 export default PlantsList;

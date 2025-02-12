@@ -6,4 +6,6 @@ export type PlantData = {
 	location: LOCATION | undefined;
 	description: string;
 	visibleState: VISIBLE_STATE | undefined;
+	lastWatered?: string;
+	daysBetweenWatering?: number;
 }
