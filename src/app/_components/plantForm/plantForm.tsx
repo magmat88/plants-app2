@@ -5,7 +5,7 @@ import PlantFormField from "@/app/_components/plantForm/plantFormField";
 import {LOCATION, VISIBLE_STATE} from "../../_constants";
 import {PlantData} from "../../_types";
 import {getPlantById, savePlant} from "@/app/_utils/localStorageService";
-import {useEffect} from "react";
+import {ReactElement, useEffect} from "react";
 
 type FormField = {
 	label: string,
@@ -19,7 +19,7 @@ interface PlantFormProps {
 	id: string;
 }
 
-const PlantForm = ({onClose, id}: PlantFormProps) => {
+const PlantForm = ({onClose, id}: PlantFormProps): ReactElement | null => {
 	const {register, handleSubmit, watch, reset, formState: {errors}} = useForm<PlantData>({
 		defaultValues: {
 			name: "",
