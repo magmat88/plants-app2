@@ -1,12 +1,13 @@
-import {FieldValues, useForm} from "react-hook-form";
+import {FieldValues, UseFormRegister} from "react-hook-form";
+import {PlantData} from "@/app/_types";
 
 interface PlantFormFieldProps {
 	label: string;
-	fieldName: string;
-	register: ReturnType<typeof useForm>['register'];
+	fieldName: keyof PlantData;
+	register: UseFormRegister<PlantData>;
 	errors: FieldValues;
-	value: string;
-	options?: string;
+	value: number | string | undefined;
+	options?: string[] | undefined;
 }
 
 const PlantFormField = ({label, fieldName, register, errors, value, options}: PlantFormFieldProps) => {

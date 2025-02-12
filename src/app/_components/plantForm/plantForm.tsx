@@ -9,8 +9,8 @@ import {ReactElement, useEffect} from "react";
 
 type FormField = {
 	label: string,
-	fieldName: string,
-	value: string,
+	fieldName: keyof PlantData,
+	value: number | string | undefined,
 	options?: string[];
 };
 
@@ -32,7 +32,7 @@ const PlantForm = ({onClose, id}: PlantFormProps): ReactElement | null => {
 	});
 
 	const onSubmit: SubmitHandler<PlantData> = (data) => {
-		if (id) {
+		if (id.length > 0) {
 			updatePlant(id, data);
 		} else {
 			savePlant(data);
@@ -49,13 +49,13 @@ const PlantForm = ({onClose, id}: PlantFormProps): ReactElement | null => {
 
 	const formFields: FormField[] = [
 		{label: "Name", fieldName: "name", value: watch("name")},
-		{label: "Location", fieldName: "location", value: watch("location"), options: Object.values(LOCATION)},
+		{label: "Location", fieldName: "location", value: watch("location"), options: Object.values(LOCATION) as string[]},
 		{label: "Description", fieldName: "description", value: watch("description")},
 		{
 			label: "Visible state",
 			fieldName: "visibleState",
 			value: watch("visibleState"),
-			options: Object.values(VISIBLE_STATE)
+			options: Object.values(VISIBLE_STATE) as string[]
 		}
 	];
 
@@ -87,7 +87,7 @@ const PlantForm = ({onClose, id}: PlantFormProps): ReactElement | null => {
 				<h2 className="text-xl font-bold mb-4 text-center">{id ? "Edit Plant" : "Add Plant"}</h2>
 
 				{formFields.map(({label, fieldName, value, options}) => (
-					<PlantFormField key={fieldName} label={label} fieldName={fieldName} register={register}
+					<PlantFormField key={`${fieldName}`} label={label} fieldName={fieldName} register={register}
 					                errors={errors} value={value} options={options}/>))}
 
 				<div className="flex justify-between mt-4 space-x-4">

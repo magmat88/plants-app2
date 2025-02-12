@@ -18,10 +18,10 @@ interface PlantsListProps {
 
 const PlantsList = ({data, refreshData}: PlantsListProps) => {
 	const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
-	const [currentId, setCurrentId] = useState<string>(null);
+	const [currentId, setCurrentId] = useState<string>("");
 
 	const handleAddPlant = () => {
-		setCurrentId(null);
+		setCurrentId("");
 		setIsFormVisible(true);
 	}
 
