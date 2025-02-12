@@ -2,18 +2,18 @@
 
 import {MantineReactTable, MRT_ColumnDef, useMantineReactTable} from 'mantine-react-table';
 import {useMemo, useState} from "react";
-import {PlantData} from "@/app/types";
+import {PlantData} from "../../_types";
 import {ActionIcon, Box} from '@mantine/core';
 import {
 	IconEdit,
 	IconTrash,
 	IconBucketDroplet,
 } from '@tabler/icons-react';
-import {removePlant, waterPlant} from "@/app/utils/localStorageService";
+import {removePlant, waterPlant} from "@/app/_utils/localStorageService";
 import PlantForm from "@/app/_components/plantForm/plantForm";
-import {formatDate} from "@/app/utils/dateUtils";
-import {getWateringStatus} from "@/app/helpers/getWateringStatus";
-import {DAYS_BETWEEN_WATERING_DEFAULT} from "@/app/constants";
+import {formatDate} from "@/app/_utils/dateUtils";
+import {getWateringStatus} from "@/app/_helpers/getWateringStatus";
+import {DAYS_BETWEEN_WATERING_DEFAULT} from "@/app/_constants";
 
 interface PlantsListProps {
 	data: PlantData[];

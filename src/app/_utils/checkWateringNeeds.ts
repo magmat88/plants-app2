@@ -1,4 +1,4 @@
-import {DAYS_BETWEEN_WATERING_DEFAULT} from "@/app/constants";
+import {DAYS_BETWEEN_WATERING_DEFAULT} from "@/app/_constants";
 
 export const checkWateringNeeds = (lastWatered: string | undefined, daysBetweenWatering: number = DAYS_BETWEEN_WATERING_DEFAULT) => {
 	if (!lastWatered) {

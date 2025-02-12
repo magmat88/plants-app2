@@ -1,4 +1,4 @@
-import {LOCATION, VISIBLE_STATE} from "@/app/constants";
+import {LOCATION, VISIBLE_STATE} from "../_constants";
 
 export type PlantData = {
 	id: string;

@@ -14,7 +14,7 @@ const PlantFormField = ({label, fieldName, register, errors, value, options}: Pl
 
 	return (
 		<div className="mb-4">
-			<label className="block text-gray-700">{label}</label>
+			<label htmlFor={fieldName} className="block text-gray-700">{label}</label>
 
 			<div className="flex items-center">
 				{options ? (

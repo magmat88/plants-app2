@@ -1,5 +1,5 @@
 import {IconDropletExclamation, IconDropletFilled, IconDroplet} from "@tabler/icons-react";
-import {checkWateringNeeds} from "@/app/utils/checkWateringNeeds";
+import {checkWateringNeeds} from "@/app/_utils/checkWateringNeeds";
 
 export const getWateringStatus = (lastWatered: string | undefined, daysBetweenWatering: number) => {
 	if (!lastWatered) {

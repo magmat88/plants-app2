@@ -2,10 +2,10 @@
 
 import {useForm, SubmitHandler} from "react-hook-form";
 import PlantFormField from "@/app/_components/plantForm/plantFormField";
-import {DAYS_BETWEEN_WATERING_DEFAULT, LOCATION, VISIBLE_STATE} from "@/app/constants";
-import {PlantData} from "@/app/types";
-import {getPlantById, savePlant, updatePlant} from "@/app/utils/localStorageService";
-import {useEffect} from "react";
+import {DAYS_BETWEEN_WATERING_DEFAULT, LOCATION, VISIBLE_STATE} from "@/app/_constants";
+import {PlantData} from "@/app/_types";
+import {getPlantById, savePlant, updatePlant} from "@/app/_utils/localStorageService";
+import {ReactElement, useEffect} from "react";
 
 type FormField = {
 	label: string,
@@ -19,7 +19,7 @@ interface PlantFormProps {
 	id: string;
 }
 
-const PlantForm = ({onClose, id}: PlantFormProps) => {
+const PlantForm = ({onClose, id}: PlantFormProps): ReactElement | null => {
 	const {register, handleSubmit, watch, reset, formState: {errors}} = useForm<PlantData>({
 		defaultValues: {
 			name: "",
