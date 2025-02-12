@@ -23,4 +23,9 @@ export enum LOCAL_STORAGE_KEYS {
 	PLANTS_DATA = "plantsAppData"
 }
 
-export const DAYS_BETWEEN_WATERING_DEFAULT = 7;
+export const DAYS_BETWEEN_PLANT_CARE_DEFAULT = 7;
+
+export enum PLANT_CARE_TYPE {
+	WATERING = "watering",
+	FERTILIZING = "fertilizing"
+}

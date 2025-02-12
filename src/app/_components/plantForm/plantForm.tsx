@@ -2,7 +2,7 @@
 
 import {useForm, SubmitHandler} from "react-hook-form";
 import PlantFormField from "@/app/_components/plantForm/plantFormField";
-import {DAYS_BETWEEN_WATERING_DEFAULT, LOCATION, VISIBLE_STATE} from "@/app/_constants";
+import {DAYS_BETWEEN_PLANT_CARE_DEFAULT, LOCATION, VISIBLE_STATE} from "@/app/_constants";
 import {PlantData} from "@/app/_types";
 import {getPlantById, savePlant, updatePlant} from "@/app/_utils/localStorageService";
 import {ReactElement, useEffect} from "react";
@@ -26,7 +26,8 @@ const PlantForm = ({onClose, id}: PlantFormProps): ReactElement | null => {
 			location: undefined,
 			description: "",
 			visibleState: undefined,
-			daysBetweenWatering: DAYS_BETWEEN_WATERING_DEFAULT
+			daysBetweenWatering: DAYS_BETWEEN_PLANT_CARE_DEFAULT,
+			daysBetweenFertilizing: DAYS_BETWEEN_PLANT_CARE_DEFAULT
 		}
 	});
 
@@ -57,7 +58,12 @@ const PlantForm = ({onClose, id}: PlantFormProps): ReactElement | null => {
 		label: "Days between watering",
 		fieldName: "daysBetweenWatering",
 		value: watch("daysBetweenWatering"),
-	},)
+	}, {
+		label: "Days between fertilizing",
+		fieldName: "daysBetweenFertilizing",
+		value: watch("daysBetweenFertilizing"),
+		})
+
 
 	useEffect(() => {
 		if (id) {
