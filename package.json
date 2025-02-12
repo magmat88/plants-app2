@@ -1,6 +1,6 @@
 {
   "name": "plants-app2",
-  "homepage": "https://magmat88.github.io/plants-app/",
+  "homepage": "https://magmat88.github.io/plants-app2/",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -14,7 +14,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
 	"predeploy": "npm run build",
-	"deploy": "gh-pages -d build"
+	"deploy": "gh-pages -d .next"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
