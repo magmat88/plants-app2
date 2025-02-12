@@ -2,10 +2,10 @@
 
 import {MantineReactTable, MRT_ColumnDef, useMantineReactTable} from 'mantine-react-table';
 import {useMemo, useState} from "react";
-import {PlantData} from "@/app/types";
+import {PlantData} from "../../_types";
 import {ActionIcon, Box} from '@mantine/core';
 import {IconEdit, IconTrash} from '@tabler/icons-react';
-import {removePlant} from "@/app/utils/localStorageService";
+import {removePlant} from "@/app/_utils/localStorageService";
 import PlantForm from "@/app/_components/plantForm/plantForm";
 
 interface PlantsListProps {
