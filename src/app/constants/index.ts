@@ -22,3 +22,5 @@ export enum VISIBLE_STATE {
 export enum LOCAL_STORAGE_KEYS {
 	PLANTS_DATA = "plantsAppData"
 }
+
+export const DAYS_BETWEEN_WATERING_DEFAULT = 7;

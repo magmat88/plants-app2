@@ -2,9 +2,9 @@
 
 import {useForm, SubmitHandler} from "react-hook-form";
 import PlantFormField from "@/app/_components/plantForm/plantFormField";
-import {LOCATION, VISIBLE_STATE} from "@/app/constants";
+import {DAYS_BETWEEN_WATERING_DEFAULT, LOCATION, VISIBLE_STATE} from "@/app/constants";
 import {PlantData} from "@/app/types";
-import {getPlantById, savePlant} from "@/app/utils/localStorageService";
+import {getPlantById, savePlant, updatePlant} from "@/app/utils/localStorageService";
 import {useEffect} from "react";
 
 type FormField = {
@@ -26,11 +26,17 @@ const PlantForm = ({onClose, id}: PlantFormProps) => {
 			location: undefined,
 			description: "",
 			visibleState: undefined,
+			daysBetweenWatering: DAYS_BETWEEN_WATERING_DEFAULT
 		}
 	});
 
 	const onSubmit: SubmitHandler<PlantData> = (data) => {
-		savePlant(data);
+		id ? updatePlant(id, data) : savePlant(data);
+		reset();
+		onClose();
+	}
+
+	const handleCancel = () => {
 		reset();
 		onClose();
 	}
@@ -44,8 +50,14 @@ const PlantForm = ({onClose, id}: PlantFormProps) => {
 			fieldName: "visibleState",
 			value: watch("visibleState"),
 			options: Object.values(VISIBLE_STATE)
-		},
+		}
 	];
+
+	id && formFields.push({
+		label: "Days between watering",
+		fieldName: "daysBetweenWatering",
+		value: watch("daysBetweenWatering"),
+	},)
 
 	useEffect(() => {
 		if (id) {
@@ -56,16 +68,23 @@ const PlantForm = ({onClose, id}: PlantFormProps) => {
 
 	return (
 		<div className="flex justify-center items-center w-full bg-gray-100 min-h-screen">
-			<form onSubmit={handleSubmit(onSubmit)} method="POST" className="p-6 bg-white rounded-lg shadow-md w-full max-w-md">
+			<form onSubmit={handleSubmit(onSubmit)} method="POST"
+			      className="p-6 bg-white rounded-lg shadow-md w-full max-w-md">
 				<h2 className="text-xl font-bold mb-4 text-center">{id ? "Edit Plant" : "Add Plant"}</h2>
 
 				{formFields.map(({label, fieldName, value, options}) => (
 					<PlantFormField key={fieldName} label={label} fieldName={fieldName} register={register}
 					                errors={errors} value={value} options={options}/>))}
 
-				<button type="submit"
-				        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition duration-200">Submit
-				</button>
+				<div className="flex justify-between mt-4 space-x-4">
+					<button type="button"
+					        onClick={handleCancel}
+					        className="w-full bg-gray-400 text-white p-2 rounded hover:bg-gray-500 transition duration-200">Cancel
+					</button>
+					<button type="submit"
+					        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition duration-200">Submit
+					</button>
+				</div>
 			</form>
 		</div>
 	)
