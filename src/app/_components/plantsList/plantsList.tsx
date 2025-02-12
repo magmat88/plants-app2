@@ -4,30 +4,12 @@ import {MantineReactTable, MRT_ColumnDef, useMantineReactTable} from 'mantine-re
 import {useMemo, useState} from "react";
 import {PlantData} from "../../_types";
 import {ActionIcon, Box} from '@mantine/core';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import {IconEdit, IconTrash} from '@tabler/icons-react';
-import {removePlant} from "@/app/_utils/localStorageService";
-=======
-import {
-	IconEdit,
-	IconTrash,
-	IconBucketDroplet,
-} from '@tabler/icons-react';
-import {removePlant, waterPlant} from "@/app/utils/localStorageService";
->>>>>>> 564e648 (fix updating plant, handle watering)
-import PlantForm from "@/app/_components/plantForm/plantForm";
-import {formatDate} from "@/app/utils/dateUtils";
-import {getWateringStatus} from "@/app/helpers/getWateringStatus";
-import {DAYS_BETWEEN_WATERING_DEFAULT} from "@/app/constants";
-=======
 import {IconBucketDroplet, IconEdit, IconTrash, IconBottle} from '@tabler/icons-react';
 import {fertilizePlant, removePlant, waterPlant} from "@/app/_utils/localStorageService";
 import PlantForm from "@/app/_components/plantForm/plantForm";
 import {formatDate} from "@/app/_utils/dateUtils";
 import {getPlantCareStatus} from "@/app/_helpers/getPlantCareStatus";
 import {DAYS_BETWEEN_PLANT_CARE_DEFAULT, PLANT_CARE_TYPE} from "@/app/_constants";
->>>>>>> e25f4dd (handle fertilizing, change icons for plant care)
 
 interface PlantsListProps {
 	data: PlantData[];
