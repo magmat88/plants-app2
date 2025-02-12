@@ -8,4 +8,6 @@ export type PlantData = {
 	visibleState: VISIBLE_STATE | undefined;
 	lastWatered?: string;
 	daysBetweenWatering?: number;
+	lastFertilized?: string;
+	daysBetweenFertilizing?: number;
 }

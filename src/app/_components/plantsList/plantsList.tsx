@@ -4,16 +4,12 @@ import {MantineReactTable, MRT_ColumnDef, useMantineReactTable} from 'mantine-re
 import {useMemo, useState} from "react";
 import {PlantData} from "../../_types";
 import {ActionIcon, Box} from '@mantine/core';
-import {
-	IconEdit,
-	IconTrash,
-	IconBucketDroplet,
-} from '@tabler/icons-react';
-import {removePlant, waterPlant} from "@/app/_utils/localStorageService";
+import {IconBucketDroplet, IconEdit, IconTrash, IconBottle} from '@tabler/icons-react';
+import {fertilizePlant, removePlant, waterPlant} from "@/app/_utils/localStorageService";
 import PlantForm from "@/app/_components/plantForm/plantForm";
 import {formatDate} from "@/app/_utils/dateUtils";
-import {getWateringStatus} from "@/app/_helpers/getWateringStatus";
-import {DAYS_BETWEEN_WATERING_DEFAULT} from "@/app/_constants";
+import {getPlantCareStatus} from "@/app/_helpers/getPlantCareStatus";
+import {DAYS_BETWEEN_PLANT_CARE_DEFAULT, PLANT_CARE_TYPE} from "@/app/_constants";
 
 interface PlantsListProps {
 	data: PlantData[];
@@ -44,6 +40,11 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 		refreshData();
 	}
 
+	const handleFertilizePlant = (id: string) => {
+		fertilizePlant(id);
+		refreshData();
+	}
+
 	const handleEditPlant = (id: string) => {
 		setCurrentId(id);
 		setIsFormVisible(true);
@@ -59,8 +60,17 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 				header: 'Watering status',
 				Cell: ({cell}) => {
 					const lastWatered = formatDate(cell.getValue() as string | undefined);
-					const daysBetweenWatering = cell.row.original.daysBetweenWatering ?? DAYS_BETWEEN_WATERING_DEFAULT;
-					return getWateringStatus(lastWatered, daysBetweenWatering);
+					const daysBetweenWatering = cell.row.original.daysBetweenWatering ?? DAYS_BETWEEN_PLANT_CARE_DEFAULT;
+					return getPlantCareStatus(lastWatered, daysBetweenWatering, PLANT_CARE_TYPE.WATERING);
+				}
+			},
+			{
+				accessorKey: 'lastFertilized',
+				header: 'Fertilizing status',
+				Cell: ({cell}) => {
+					const lastFertilized = formatDate(cell.getValue() as string | undefined);
+					const daysBetweenFertilizing = cell.row.original.daysBetweenFertilizing ?? DAYS_BETWEEN_PLANT_CARE_DEFAULT;
+					return getPlantCareStatus(lastFertilized, daysBetweenFertilizing, PLANT_CARE_TYPE.FERTILIZING);
 				}
 			},
 			{
@@ -94,7 +104,7 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 		renderRowActions: ({row}) => (
 			<Box sx={{display: 'flex', flexWrap: 'nowrap', gap: '8px'}}>
 				<ActionIcon
-					color="green"
+					color="gray"
 					onClick={() => {
 						handleEditPlant(row.original.id);
 					}}
@@ -116,6 +126,14 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 					}}
 				>
 					<IconBucketDroplet/>
+				</ActionIcon>
+				<ActionIcon
+					color="green"
+					onClick={() => {
+						handleFertilizePlant(row.original.id);
+					}}
+				>
+					<IconBottle/>
 				</ActionIcon>
 			</Box>
 		),
