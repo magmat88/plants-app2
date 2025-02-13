@@ -18,9 +18,11 @@ const Main = () => {
 	}, [])
 
 	return (<>
-		{data.length > 0 && (
+		{
+			// data.length > 0 && (
 			<PlantsList data={data} refreshData={refreshData}/>
-		)}
+		// )
+		}
 	</>)
 }
 
