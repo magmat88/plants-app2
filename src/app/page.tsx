@@ -4,6 +4,7 @@ export default function Home() {
 	return (
 		<main>
 			<Main />
+			<h1 style={{ color: "red" }}>Strona działa!</h1>;
 		</main>
 	);
 }
