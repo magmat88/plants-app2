@@ -105,6 +105,7 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 			<Box sx={{display: 'flex', flexWrap: 'nowrap', gap: '8px'}}>
 				<ActionIcon
 					color="gray"
+					title="Edit"
 					onClick={() => {
 						handleEditPlant(row.original.id);
 					}}
@@ -113,6 +114,7 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 				</ActionIcon>
 				<ActionIcon
 					color="red"
+					title="Remove"
 					onClick={() => {
 						handleRemovePlant(row.original.id);
 					}}
@@ -121,6 +123,7 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 				</ActionIcon>
 				<ActionIcon
 					color="blue"
+					title="Mark as watered"
 					onClick={() => {
 						handleWaterPlant(row.original.id);
 					}}
@@ -129,6 +132,7 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 				</ActionIcon>
 				<ActionIcon
 					color="green"
+					title="Mark as fertilized"
 					onClick={() => {
 						handleFertilizePlant(row.original.id);
 					}}
@@ -141,6 +145,17 @@ const PlantsList = ({data, refreshData}: PlantsListProps) => {
 
 	return (
 		<div>
+			<div className="text-center my-6">
+				<h1 className="text-3xl font-bold text-gray-800">Plant Management App</h1>
+				{data.length === 0 && (
+					<p className="text-l text-gray-500 mt-4">
+						You have no plants yet. Add your first plant by clicking the button below!
+						<br/>
+						Enjoy caring for your plants and watch them thrive!
+					</p>
+				)}
+			</div>
+
 			<div className="flex justify-end mb-4 mt-4 mr-4">
 				<button onClick={handleAddPlant}
 				        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-200">Add
